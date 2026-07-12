@@ -251,6 +251,13 @@
   .form-grid .full { grid-column: 1 / -1; }
   .form-grid button { grid-column: 1 / -1; justify-self: start; margin-top: 4px; }
 
+  .cal-inline-frame {
+    width: 100%; max-width: 760px; min-height: 620px;
+    margin-top: 16px; background: var(--card-bg);
+    border: 1px solid var(--line); box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
   footer { padding: 40px 0; }
   .footer-inner { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
   footer .brand { font-size: 1rem; }
@@ -474,16 +481,52 @@
   <div class="container cta-block">
     <span class="eyebrow">Get started</span>
     <h2>See what your learners aren't telling you yet.</h2>
-    <p class="hero-sub">No commitment, no cost to explore — just a conversation about whether this fits what you're trying to understand about your learners.</p>
-    <form class="form-grid" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Request received — thank you.';">
-      <label>Name<input type="text" placeholder="Jordan Ramirez" required></label>
-      <label>Organization<input type="text" placeholder="Riverside Middle School"></label>
-      <label class="full">Email<input type="email" placeholder="jordan@school.edu" required></label>
-      <label class="full">What are you hoping to learn about your learners?<textarea rows="3" placeholder="Tell us a bit about your class, cohort, or program..."></textarea></label>
-      <button type="submit" class="btn btn-primary">Request a Demo</button>
-    </form>
+    <p class="hero-sub">No commitment, no cost to explore — pick a time below for a 15-minute conversation about whether this fits what you're trying to understand about your learners.</p>
+    <div id="cal-booking-inline" class="cal-inline-frame"></div>
+    <noscript>
+      <a class="btn btn-primary" href="https://cal.com/soumyade/demo-call">Book a Demo Call →</a>
+    </noscript>
   </div>
 </section>
+
+<script type="text/javascript">
+  (function (C, A, L) {
+    let p = function (a, ar) { a.q.push(ar); };
+    let d = C.document;
+    C.Cal = C.Cal || function () {
+      let cal = C.Cal;
+      let ar = arguments;
+      if (!cal.loaded) {
+        cal.ns = {};
+        cal.q = cal.q || [];
+        d.head.appendChild(d.createElement("script")).src = A;
+        cal.loaded = true;
+      }
+      if (ar[0] === L) {
+        const api = function () { p(api, arguments); };
+        const namespace = ar[1];
+        api.q = api.q || [];
+        if (typeof namespace === "string") {
+          cal.ns[namespace] = cal.ns[namespace] || api;
+          p(cal.ns[namespace], ar);
+          p(cal, ["initNamespace", namespace]);
+        } else p(cal, ar);
+        return;
+      }
+      p(cal, ar);
+    };
+  })(window, "https://app.cal.com/embed/embed.js", "init");
+
+  Cal("init", "demo-call", { origin: "https://cal.com" });
+
+  Cal.ns["demo-call"]("inline", {
+    elementOrSelector: "#cal-booking-inline",
+    config: { layout: "month_view" },
+    calLink: "soumyade/demo-call",
+  });
+
+  Cal.ns["demo-call"]("ui", { hideEventTypeDetails: false, layout: "month_view" });
+</script>
 
 <footer>
   <div class="container footer-inner">
