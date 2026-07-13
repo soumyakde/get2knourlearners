@@ -227,14 +227,40 @@
   .vision-box p { font-size: 0.92rem; color: var(--ink-soft); }
   .vision-box .btn { margin-top: 20px; }
 
-  /* -------- Demo placeholder -------- */
-  .demo-frame {
-    aspect-ratio: 16/9; max-width: 760px;
-    border: 1px dashed var(--line); background: var(--paper-3);
-    display: grid; place-items: center; text-align: center; gap: 10px; padding: 32px;
+  /* -------- Dashboard tours -------- */
+  .tour-tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+  .tour-tab {
+    font-family: var(--font-body); font-weight: 600; font-size: 0.9rem;
+    padding: 11px 20px; background: var(--card-bg); color: var(--ink-soft);
+    border: 1px solid var(--line); cursor: pointer;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 100%, 8px 100%);
+    display: flex; align-items: center; gap: 8px;
   }
-  .demo-frame .glyph { font-size: 2rem; opacity: 0.5; }
-  .demo-frame p { font-size: 0.9rem; color: var(--ink-soft); max-width: 40ch; }
+  .tour-tab .dur { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-soft); opacity: 0.7; }
+  .tour-tab[aria-selected="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .tour-tab[aria-selected="true"] .dur { color: var(--paper); opacity: 0.75; }
+  .tour-tab:hover:not([aria-selected="true"]) { border-color: var(--gold); color: var(--ink); }
+  .tour-subtabs { display: none; gap: 8px; margin-bottom: 18px; }
+  .tour-subtabs.show { display: flex; }
+  .tour-subtab {
+    font-family: var(--font-mono); font-size: 0.76rem; padding: 6px 14px;
+    background: transparent; color: var(--ink-soft); border: 1px solid var(--line); cursor: pointer;
+  }
+  .tour-subtab[aria-selected="true"] { border-color: var(--gold); color: var(--gold); font-weight: 600; }
+  .tour-panel { display: none; }
+  .tour-panel.active { display: block; }
+  .video-frame {
+    aspect-ratio: 16/9; max-width: 760px;
+    border: 1px solid var(--line); background: var(--paper-3);
+    box-shadow: var(--shadow); overflow: hidden;
+  }
+  .video-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+  .video-placeholder {
+    width: 100%; height: 100%; display: grid; place-items: center;
+    text-align: center; gap: 10px; padding: 32px; border: 1px dashed var(--line);
+  }
+  .video-placeholder .glyph { font-size: 2rem; opacity: 0.5; }
+  .video-placeholder p { font-size: 0.9rem; color: var(--ink-soft); max-width: 40ch; }
 
   /* -------- Get started -------- */
   .cta-block { text-align: center; display: grid; justify-items: center; gap: 18px; }
@@ -468,14 +494,72 @@
   <div class="container">
     <div class="block-head">
       <span class="eyebrow">See it in action</span>
-      <h2>A guided tour, coming soon</h2>
+      <h2>Guided dashboard tours</h2>
     </div>
-    <div class="demo-frame">
-      <span class="glyph">◈</span>
-      <p>Screenshots and a walkthrough of the Student Dashboard, Teacher Dashboard, and a sample composite index report are on their way. In the meantime, request a live demo below.</p>
+
+    <div class="tour-tabs" role="tablist">
+      <button class="tour-tab" data-tour="student" role="tab" aria-selected="true">Student Dashboard <span class="dur">~4 min</span></button>
+      <button class="tour-tab" data-tour="teacher" role="tab" aria-selected="false">Teacher Dashboard <span class="dur">~11 min</span></button>
+      <button class="tour-tab" data-tour="admin" role="tab" aria-selected="false">Admin Dashboard <span class="dur">~5 min</span></button>
+    </div>
+
+    <!-- Teacher Dashboard sub-tabs: only shown when the Teacher tour is a single combined video with chapters -->
+    <div class="tour-subtabs" id="teacher-subtabs">
+      <button class="tour-subtab" aria-selected="true">Full tour</button>
+    </div>
+
+    <div class="tour-panels">
+      <div class="tour-panel active" data-panel="student">
+        <div class="video-frame">
+          <!-- STUDENT DASHBOARD VIDEO: paste YouTube embed URL below -->
+          <div class="video-placeholder">
+            <span class="glyph">▶</span>
+            <p>Student Dashboard walkthrough — video coming shortly.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tour-panel" data-panel="teacher">
+        <div class="video-frame">
+          <!-- TEACHER DASHBOARD VIDEO: paste YouTube embed URL below -->
+          <div class="video-placeholder">
+            <span class="glyph">▶</span>
+            <p>Teacher Dashboard walkthrough — video coming shortly.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tour-panel" data-panel="admin">
+        <div class="video-frame">
+          <!-- ADMIN DASHBOARD VIDEO: paste YouTube embed URL below -->
+          <div class="video-placeholder">
+            <span class="glyph">▶</span>
+            <p>Admin Dashboard walkthrough — video coming shortly.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
+<script>
+  (function () {
+    var tabs = document.querySelectorAll('.tour-tab');
+    var panels = document.querySelectorAll('.tour-panel');
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        tabs.forEach(function (t) { t.setAttribute('aria-selected', 'false'); });
+        tab.setAttribute('aria-selected', 'true');
+        var target = tab.getAttribute('data-tour');
+        panels.forEach(function (p) {
+          p.classList.toggle('active', p.getAttribute('data-panel') === target);
+        });
+        var subtabs = document.getElementById('teacher-subtabs');
+        subtabs.classList.toggle('show', target === 'teacher');
+      });
+    });
+  })();
+</script>
 
 <section class="block" id="get-started">
   <div class="container cta-block">
