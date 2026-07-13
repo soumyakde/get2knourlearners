@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Get2KnoUrLearners — See the Whole Learner</title>
 <meta name="description" content="One-click, evidence-based assessment of content knowledge, engagement, and motivation for learners — no statistics background, no coding required.">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
 <style>
   :root {
     --ink: #16233A;
@@ -107,7 +110,9 @@
   .brand {
     font-family: var(--font-display); font-size: 1.15rem; font-weight: 600;
     letter-spacing: 0.01em; white-space: nowrap;
+    display: flex; align-items: center; gap: 10px;
   }
+  .brand img { height: 34px; width: auto; display: block; }
   .brand .dot { color: var(--gold); }
   .navlinks { display: flex; gap: 22px; flex-wrap: wrap; }
   .navlinks a {
@@ -189,7 +194,10 @@
   .instrument-card { padding: 24px; background: var(--card-bg); border: 1px solid var(--line); box-shadow: var(--shadow); }
   .instrument-card h3 { font-size: 1.02rem; font-family: var(--font-body); font-weight: 700; margin-bottom: 8px; }
   .instrument-card p { font-size: 0.88rem; color: var(--ink-soft); }
-  .cite { display: block; margin-top: 10px; font-family: var(--font-mono); font-size: 0.74rem; color: var(--gold); }
+  .instrument-card ul { margin: 12px 0 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+  .instrument-card ul li { font-size: 0.82rem; color: var(--ink-soft); padding-left: 14px; position: relative; }
+  .instrument-card ul li::before { content: "—"; position: absolute; left: 0; color: var(--gold); }
+  .cite { display: block; margin-top: 14px; font-family: var(--font-mono); font-size: 0.74rem; color: var(--gold); }
   .rigor-note {
     margin-top: 40px; padding: 24px 26px; background: var(--paper-3); border-left: 3px solid var(--gold);
   }
@@ -294,8 +302,9 @@
 
 <nav class="topnav">
   <div class="topnav-inner">
-    <div class="brand">Get2Kno<span class="dot">Ur</span>Learners</div>
+    <div class="brand"><img src="assets/logo-icon.png" alt="Get2KnoUrLearners logo">Get2Kno<span class="dot">Ur</span>Learners</div>
     <div class="navlinks">
+      <a href="#beyond-the-score">Philosophy</a>
       <a href="#how-it-works">How It Works</a>
       <a href="#science">The Science</a>
       <a href="#features">Features</a>
@@ -312,7 +321,7 @@
   <div class="hero-inner">
     <span class="eyebrow">Evidence-based learner assessment</span>
     <h1>See the whole learner —<br><em>not just the score.</em></h1>
-    <p class="hero-sub">One-click, evidence-based assessment of content knowledge, engagement, and motivation — no statistics background, no coding, no separate tools to stitch together.</p>
+    <p class="hero-sub">A test score alone can't tell you why a learner is thriving, struggling, or quietly checked out. One-click, evidence-based assessment of content knowledge, engagement, and motivation — no statistics background, no coding required.</p>
     <p class="hero-support">Built for teachers, trainers, and program leaders who need a real picture of how learners are doing — not just whether they got the answer right.</p>
     <div class="hero-ctas">
       <a class="btn btn-primary" href="#get-started">Request a Demo</a>
@@ -320,6 +329,45 @@
     </div>
   </div>
 </header>
+
+<section class="block" id="beyond-the-score">
+  <div class="container">
+    <div class="block-head">
+      <span class="eyebrow">The philosophy</span>
+      <h2>Beyond the score</h2>
+      <p class="measure" style="color:var(--ink-soft); font-size:1rem;">A single test score can't explain why one learner thrives and another quietly disengages. Get2KnoUrLearners looks at three more dimensions most assessment tools never touch — measured continuously, not just at the end.</p>
+    </div>
+    <div class="science-grid">
+      <div class="instrument-card">
+        <h3>Cognitive Engagement</h3>
+        <p>How a learner actually perceives and connects with what they're being taught — not just whether they can recite it back.</p>
+        <ul>
+          <li>Content perception: is the material coherent, plausible, credible, comprehensible?</li>
+          <li>Individual factors: attention, personal relevance, cultural orientation</li>
+        </ul>
+      </div>
+      <div class="instrument-card">
+        <h3>Situational Motivation</h3>
+        <p>Why a learner engages with the material — tracked module by module across the whole course, not assumed to stay constant.</p>
+        <ul>
+          <li>Intrinsic motivation</li>
+          <li>Identified regulation</li>
+          <li>External regulation</li>
+          <li>Amotivation</li>
+        </ul>
+      </div>
+      <div class="instrument-card">
+        <h3>Situational Cognitive Engagement</h3>
+        <p>How a learner engages with the work itself, moment to moment, across every task and project in the course.</p>
+        <ul>
+          <li>Engagement with the task at hand</li>
+          <li>Effort and persistence</li>
+          <li>Experience of flow</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section class="block" id="how-it-works">
   <div class="container">
@@ -358,7 +406,7 @@
     <div class="block-head">
       <span class="eyebrow">The science</span>
       <h2>Built on validated research, not guesswork</h2>
-      <p class="measure" style="color:var(--ink-soft); font-size:1rem;">Assessment frameworks are never neutral — they embody a particular view of what learning is and how it should be evidenced. Get2KnoUrLearners is built on a specific, defensible view: that learning is an active process of constructing understanding, that it unfolds across cognitive, affective, and behavioral dimensions at once, and that quantitative and qualitative evidence, placed in dialogue, reveal more than either could alone.</p>
+      <p class="measure" style="color:var(--ink-soft); font-size:1rem;">Assessment frameworks are never neutral — they embody a particular view of what learning is and how it should be evidenced. The three dimensions introduced above aren't measured by intuition — each maps to a specific, peer-reviewed, validated instrument:</p>
     </div>
     <div class="science-grid">
       <div class="instrument-card">
@@ -610,7 +658,7 @@
 
 <footer>
   <div class="container footer-inner">
-    <div class="brand">Get2Kno<span class="dot">Ur</span>Learners</div>
+    <div class="brand"><img src="assets/logo-icon.png" alt="Get2KnoUrLearners logo">Get2Kno<span class="dot">Ur</span>Learners</div>
     <p class="fine">Evidence-based, human-centered learner assessment. This site is a private review draft.</p>
   </div>
 </footer>
